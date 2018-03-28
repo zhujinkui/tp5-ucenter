@@ -9,6 +9,7 @@
 // +----------------------------------------------------------------------
 
 namespace think;
+use think\common\Tools;
 use think\Config;
 
 class Ucenter {
@@ -52,9 +53,9 @@ class Ucenter {
             $_DCACHE = $get = $post = array();
 
             $code = @$_GET['code'];
-            parse_str(_authcode($code, 'DECODE', UC_KEY), $get);
+            parse_str(Tools::_authcode($code, 'DECODE', UC_KEY), $get);
             if(MAGIC_QUOTES_GPC) {
-                $get = _stripslashes($get);
+                $get = Tools::_stripslashes($get);
             }
 
             $timestamp = time();
