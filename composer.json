@@ -15,8 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "think\\": "src/",
-            "files": ["src/common/Tools.php"]
+            "think\\": "src/"
         }
     }
 }
