@@ -1,0 +1,22 @@
+{
+    "name": "zhujinkui/tp5-ucenter",
+    "description": "This is a UCenter class library based on ThinkPHP framework integration",
+    "type": "library",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "zhujinkui",
+            "email": "developer@zhujinkui.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "think\\": "src/",
+            "files": ["src/common/Tools.php"]
+        }
+    }
+}
