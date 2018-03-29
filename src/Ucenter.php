@@ -10,7 +10,7 @@
 
 namespace think;
 use think\common\Tools;
-use think\Config;
+use think\UcNote;
 
 class Ucenter {
     /**
@@ -77,7 +77,7 @@ class Ucenter {
                 $GLOBALS['db']->connect($dbhost, $dbuser, $dbpw, $dbname, $pconnect, true, $dbcharset);
                 $GLOBALS['tablepre'] = $tablepre;
                 unset($dbhost, $dbuser, $dbpw, $dbname, $pconnect);
-                $uc_note = new uc_note();
+                $uc_note = new UcNote();
                 exit($uc_note->$get['action']($get, $post));
             } else {
                 exit(API_RETURN_FAILED);
