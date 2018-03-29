@@ -9,8 +9,6 @@
 // +----------------------------------------------------------------------
 
 namespace think;
-use think\common\Tools;
-use think\Config;
 
 Class UcNote {
     var $dbconfig = '';
