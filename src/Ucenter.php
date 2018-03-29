@@ -11,6 +11,7 @@
 namespace think;
 use think\common\Tools;
 use think\UcNote;
+use think\DbStuff;
 
 class Ucenter {
     /**
@@ -59,34 +60,44 @@ class Ucenter {
             }
 
             $timestamp = time();
+
             if($timestamp - $get['time'] > 3600) {
                 exit('Authracation has expiried');
             }
+
             if(empty($get)) {
                 exit('Invalid Request');
             }
+
             $action = $get['action'];
 
             require_once UCENTER_ROOT_PATH .'./uc_client/lib/xml.class.php';
 
             $post = xml_unserialize(file_get_contents('php://input'));
 
-            if(in_array($get['action'], array('test', 'deleteuser', 'renameuser', 'gettag', 'synlogin', 'synlogout', 'updatepw', 'updatebadwords', 'updatehosts', 'updateapps', 'updateclient', 'updatecredit', 'getcreditsettings', 'updatecreditsettings'))) {
-                require_once UCENTER_ROOT_PATH .'./include/db_mysql.class.php';
-                $GLOBALS['db'] = new dbstuff;
-                $GLOBALS['db']->connect($dbhost, $dbuser, $dbpw, $dbname, $pconnect, true, $dbcharset);
-                $GLOBALS['tablepre'] = $tablepre;
-                unset($dbhost, $dbuser, $dbpw, $dbname, $pconnect);
+            // if(in_array($get['action'], array('test', 'deleteuser', 'renameuser', 'gettag', 'synlogin', 'synlogout', 'updatepw', 'updatebadwords', 'updatehosts', 'updateapps', 'updateclient', 'updatecredit', 'getcreditsettings', 'updatecreditsettings'))) {
+            //     require_once UCENTER_ROOT_PATH .'./include/db_mysql.class.php';
+            //     $GLOBALS['db'] = new dbstuff;
+            //     $GLOBALS['db']->connect($dbhost, $dbuser, $dbpw, $dbname, $pconnect, true, $dbcharset);
+            //     $GLOBALS['tablepre'] = $tablepre;
+            //     unset($dbhost, $dbuser, $dbpw, $dbname, $pconnect);
+            //     $uc_note = new UcNote();
+            //     exit($uc_note->$get['action']($get, $post));
+            // } else {
+            //     exit(API_RETURN_FAILED);
+            // }
+
+            if (in_array($get['action'], array('test', 'deleteuser', 'renameuser', 'gettag', 'synlogin', 'synlogout', 'updatepw', 'updatebadwords', 'updatehosts', 'updateapps', 'updateclient', 'updatecredit', 'getcreditsettings', 'updatecreditsettings'))) {
                 $uc_note = new UcNote();
                 exit($uc_note->$get['action']($get, $post));
             } else {
                 exit(API_RETURN_FAILED);
             }
-        //note include 通知方式
+            //note include 通知方式
         } else {
             require_once UCENTER_ROOT_PATH .'./config.inc.php';
-            require_once UCENTER_ROOT_PATH .'./include/db_mysql.class.php';
-            $GLOBALS['db'] = new dbstuff;
+            //require_once UCENTER_ROOT_PATH .'./include/db_mysql.class.php';
+            $GLOBALS['db'] = new DbStuff();
             $GLOBALS['db']->connect($dbhost, $dbuser, $dbpw, $dbname, $pconnect, true, $dbcharset);
             $GLOBALS['tablepre'] = $tablepre;
             unset($dbhost, $dbuser, $dbpw, $dbname, $pconnect);
